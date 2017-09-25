@@ -1,0 +1,328 @@
+<html>
+    <head>
+        <script src="bower_components/jquery/dist/jquery.min.js" ></script>
+        <script src="bower_components/knockout/dist/knockout.js" ></script>
+        <script src="js/charicter.js" ></script>
+        <link href="https://fonts.googleapis.com/css?family=Tangerine" rel="stylesheet">
+
+            <style>
+ 
+.playersheet {
+    background-image : url(img/CharicterSheet.png);
+    background-size: 8.5in 11in;
+    background-repeat: no-repeat;
+    width: 8.5in;
+    height: 11in;
+    position: relative;
+    font-family: 'Tangerine', cursive;
+    font-size: 24px;
+}
+.classname {
+    position: absolute;
+    left: 3.65in;
+    top: .53in;
+}
+.classlevel {
+    position: absolute;
+    left: 3.15in;
+    top: .85in;
+}
+.playerbackground{
+     position: absolute;
+    left: 5.1in;
+    top: .53in;
+}
+.classscore {
+    position: absolute;
+    left: .47in;
+    width: .61in;
+    text-align: center;
+    font-size: 32px;
+}
+.classmodifier {
+    position: absolute;
+    left: .47in;
+    width: .61in;
+    text-align: center;
+    font-size: 18px;
+}
+
+.classScoreStrength {
+    top: 2in;
+}
+.classModifierStrength {
+    top: 2.45in;
+}
+
+.classScoreDexterity {
+    top: 3.04in;
+}
+.classModifierDexterity {
+    top: 3.49in;
+}
+
+.classScoreConstitution {
+    top: 4.08in;
+}
+.classModifierConstitution {
+    top: 4.53in;
+}
+.classScoreIntelligence {
+    top: 5.12in;
+}
+.classModifierIntelligence {
+    top: 5.57in;
+}
+.classScoreWisdom {
+    top: 6.16in;
+}
+.classModifierWisdom {
+    top: 6.61in;
+}
+.classScoreCharisma {
+    top: 7.19in;
+}
+.classModifierCharisma {
+    top: 7.64in;
+}
+.classprofbonus {
+    position: absolute;
+    left: 1.4in;
+    top: 2.1in;
+    width: .30in;
+    text-align: center;
+}
+.playerresorces {
+    position: absolute;
+    left: 3.18in;
+    
+    top: 6in;
+    width: 4.8in;
+    height: 1.8in;
+    text-align: left;
+    line-height: .149in;
+}
+.playerresorce {
+    position: relative;
+    font-size: 12px;
+    display: inline-block;
+    width: 2.2in;
+    overflow: hidden;
+    white-space: nowrap;
+    padding-top: 4px;
+}
+.playerresorce:nth-child(even){
+    padding-left: .28in;
+}
+.classproficient {
+    position: absolute;
+    left: 1.42in;
+}
+.classProficientStrength {
+        top: 2.515in;
+}
+.classProficientDexterity {
+        top: 2.695in;
+}
+.classProficientConstitution {
+        top: 2.895in;
+}
+.classProficientIntelligence {
+        top: 3.06in;
+}
+.classProficientWisdom {
+        top: 3.24in;
+}
+.classProficientCharisma {
+        top: 3.43in;
+}
+.classproficientchecked , .classskillchecked {
+    position: relative;
+    width: .1in;
+    height: 0.1in;
+    border-radius: 0.05in;
+    background: black;
+    display: inline-block;
+}
+.classproficientunchecked , .classskillunchecked {
+    position: relative;
+    width: .1in;
+    height: 0.1in;
+    border-radius: 0.05in;
+    background:transparent;
+    display: inline-block;
+}
+.classproficientvalue {
+    position: relative;
+    display: inline-block;
+    padding-left: 5px;
+    top: -4px;
+}
+.playerProficiencies {
+    position: absolute;
+    left: 0.5in;
+    top: 8.24in;
+    width: 2.3in;
+    height: 2.25in;
+    text-align: left;
+    line-height: .17in;
+}
+.playerProficiency {
+    position: relative;
+    font-size: 12px;
+    display: inline-block;
+    width: 2.2in;
+    overflow: hidden;
+    white-space: nowrap;
+    padding-top: 4px;
+}
+.playerSkills {
+    position: absolute;
+    left: 1.415in;
+    top: 4.11in;
+    height: 3.4in;
+    width: 2in;
+}
+.classskillmod {
+    display: inline-block;
+    padding-left:10px;
+    position:relative;
+    top: -3px;
+}
+.playerSkill {
+    line-height: 10px;
+    height: 17.6px;
+    font-size: 14px;
+}
+.ArmorBonus {
+    position: absolute;
+    top: 1.85in;
+    left: 3.2in;
+    width: .5in;
+    text-align: center;
+    font-size: 32px;
+}
+.MaxHealth {
+    position: absolute;
+    top: 1.85in;
+    left: 4.01in;
+    width: .5in;
+    text-align: center;
+    font-size: 32px;
+}
+.Name {
+    position: absolute;
+    left: 0.9in;
+    top: .75in;
+}
+.hitdice {
+    position: absolute;
+    left: 5.85in;
+    width: .25in;
+    text-align: center;
+
+    font-size: 16px;
+}
+.hitdice6 {
+    top: 1.8in;
+}
+.hitdice8 {
+    top: 1.99in;
+}
+.hitdice10 {
+    top: 2.17in;
+}
+.hitdice12 {
+    top: 2.35in;
+}
+ </style>
+    
+     </head>
+     <body id="mybody" >
+    <!-- ko foreach : players -->
+    <div class="playersheet">
+        <!-- ko if : HitDice() -->
+            <div class="hitdice" data-bind="css : 'hitdice' + HitDice()[2], text : HitDice()[1]"></div>
+        <!-- /ko -->
+        <div class="Name " data-bind="text : Name()"></div>
+        <div class="classname " data-bind="text : Race() + ' : ' + ClassName()" ></div>
+        <div class="classlevel" data-bind="text : ClassLevel()"></div>
+        <div class="ArmorBonus" data-bind="text : ArmorBonus()"></div>
+        <div class="MaxHealth" data-bind="text : MaxHealth()"></div>
+        <div class="classprofbonus" data-bind="text : Level2ProfBonus(ClassLevel())"></div>
+        <div class="playerbackground" data-bind="text : Background()"></div>
+        <!-- ko foreach : ["Strength" , "Dexterity" , "Constitution" , "Intelligence", "Wisdom" , "Charisma"] -->
+            <div class="classscore" data-bind="css : 'classScore' + $data,text : $parent[ $data ]()"></div>
+            <div class="classmodifier" data-bind="css : 'classModifier' + $data,text : AS2Mod($parent[ $data ]())"></div>
+            
+            <div class="classproficient" data-bind="css : 'classProficient' + $data">
+                <!-- ko if : $parent[ $data + 'Proficient']() -->
+                    <div class="classproficientchecked"></div>
+                    <div class="classproficientvalue" data-bind="text :  (parseInt( AS2Mod($parent[ $data ]()) ) + parseInt( Level2ProfBonus($parent.ClassLevel()) )).AlwaysSymbol()" ></div>
+                <!-- /ko -->
+                <!-- ko ifnot : $parent[ $data + 'Proficient']() -->
+                    <div class="classproficientunchecked"></div>
+                    <div class="classproficientvalue" data-bind="text : parseInt( AS2Mod($parent[ $data ]()) ).AlwaysSymbol()"></div>
+                <!-- /ko -->
+            </div>
+        <!-- /ko -->
+        <div class="playerSkills" >
+            <!-- ko if : skillInfoClean().length >= 18 -->
+            <!-- ko foreach : skillInfoClean -->
+            <div class="playerSkill">
+                <!-- ko if : proficient == true -->
+                <div class="classskillchecked"></div>
+                <div class="classskillmod" data-bind="text : (parseInt( AS2Mod($parent[ base ]()) ) + parseInt( Level2ProfBonus($parent.ClassLevel()) )).AlwaysSymbol()"></div>
+                <!-- /ko -->
+                <!-- ko ifnot : proficient == true -->
+                <div class="classskillunchecked"></div>
+                <div class="classskillmod"  data-bind="text : parseInt( AS2Mod($parent[ base ]()) ).AlwaysSymbol()"></div>
+                <!-- /ko -->
+            </div>
+            <!-- /ko -->
+            <!-- /ko -->
+        </div>
+        <div class="playerresorces">
+            <!-- ko foreach : Features() -->
+                <div class="playerresorce" data-bind="text : $data"></div>
+            <!-- /ko -->
+        </div>
+        <div class="playerProficiencies">
+            <!-- ko foreach : Proficiencies() -->
+            <div class="playerProficiency" data-bind="text : $data"></div>
+            <!-- /ko -->
+        </div>
+    </div>
+    <!-- /ko -->
+     </body>
+     <script>
+         var players = [];
+         players.push( new Character('Garock_Fighter4'));
+         ko.applyBindings(  { "players" : players } );
+    </script>
+<script type="text/javascript">
+         window.onload = function () {
+             var div = document.getElementById('mybody');
+             div.ondragenter = div.ondragover = function (e) {
+                 e.preventDefault();
+                 e.dataTransfer.dropEffect = 'copy';
+                 return false;
+             }
+             div.ondrop = function (e) {
+                 e.preventDefault();
+                 for (var i = 0; i < e.dataTransfer.files.length; i++) { // e.dataTransfer is a DataTransfer object (https://developer.mozilla.org/En/DragDrop/DataTransfer), e.dataTransfer.files is a FileList object (https://developer.mozilla.org/en/DOM/FileList)
+                     var file = e.dataTransfer.files[i]; // file is a File object (https://developer.mozilla.org/en/DOM/File)
+                     var reader = new FileReader();
+                     // Read in the image file as a data URL.
+                     reader.readAsText(file);
+                     reader.onload = function () {
+                         players[0].CharXml(reader.result);
+                     };
+                 }
+
+                 e.preventDefault();
+                 return false;
+             }
+         }
+</script>
+</html>

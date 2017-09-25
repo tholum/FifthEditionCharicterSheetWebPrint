@@ -1,0 +1,135 @@
+<html>
+    <head>
+        <script src="bower_components/jquery/dist/jquery.min.js" ></script>
+        <script src="bower_components/knockout/dist/knockout.js" ></script>
+        <script src="js/charicter.js" ></script>
+        <!-- Latest compiled and minified CSS 
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u"
+            crossorigin="anonymous">
+
+        <!-- Optional theme 
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp"
+            crossorigin="anonymous">
+
+        <!-- Latest compiled and minified JavaScript 
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa"
+            crossorigin="anonymous"></script> -->
+            <style> 
+                .col-print-1 {width:8%;  float:left;}
+.col-print-2 {width:16%; float:left;}
+.col-print-3 {width:25%; float:left;}
+.col-print-4 {width:33%; float:left;}
+.col-print-5 {width:42%; float:left;}
+.col-print-6 {width:50%; float:left;}
+.col-print-7 {width:58%; float:left;}
+.col-print-8 {width:66%; float:left;}
+.col-print-9 {width:75%; float:left;}
+.col-print-10{width:83%; float:left;}
+.col-print-11{width:92%; float:left;}
+.col-print-12{width:100%; float:left;}
+.proficient {
+    background : green;
+}
+.ability {
+    position:relative;
+    border-radius: 5px;
+    border: 1px solid black;
+}
+.abilityHeader , .abilityScore , .abilityModifier {
+    width: 100%;
+    text-align: center;
+}
+.abilityScore {
+    font-size: 24px;
+    font-weight: bold;
+}
+.abilityModifier span {
+    border-radius: 3px;
+    background-color: #ccc;
+    width: 100px;
+    padding-left: 10px;
+    padding-right: 10px;
+    padding-top: 2px;
+    padding-bottom: 2px;
+}
+.playersheet {
+    background-image : url(img/CharicterSheet.png);
+    background-size: 8.5in 11in;
+    background-repeat: no-repeat;
+}
+@media print {
+  -webkit-print-color-adjust: exact;
+  .playersheet {
+    background-image : url(img/CharicterSheet.png);
+    background-size: 8in 10in;
+    background-repeat: no-repeat;
+    }
+}
+            </style>
+     </head>
+     <body>
+    <!-- ko foreach : players -->
+    <div class="playersheet">
+    <div class="row">
+        <div class="col-sm-1" data-bind="text : ClassName()" ></div>
+        <div clsss="col-sm-2" data-bind="text : ClassLevel()"></div>
+    </div>
+    <div class="row" >
+        <div class="col-sm-1 col-print-1">
+            <!-- ko foreach : ["Strength" , "Dexterity" , "Constitution" , "Intelligence", "Wisdom" , "Charisma"] -->
+            <div class="ability">
+                 <div class="abilityHeader" data-bind="text : $data"></div>
+                <div class="abilityScore" data-bind="text : $parent[ $data ]()"></div>
+                <div class="abilityModifier">
+                    <span  data-bind="text : AS2Mod($parent[ $data ]())" ></span>
+                </div>
+            </div>
+            <!-- /ko -->
+        </div>
+        <div class="col-sm-2 col-print-2">
+            <div>
+                <div class="input-group">
+                    <div class="input-group-addon">&nbsp;&nbsp;</div>
+                    <input type="text" placeholder="Insperation" value="Inspiration">
+                </div>
+
+            </div>
+            <div>
+                <div class="input-group">
+                    <div class="input-group-addon" data-bind="text : Level2ProfBonus(ClassLevel()) ">&nbsp;&nbsp;</div>
+                    <input type="text" value="PROFICIENCY BONUS">
+                </div>
+
+            </div>
+        </div>
+    </div>
+        <H1 data-bind="text : file"></H1>
+        <div >Strength : <bold data-bind="text : Strength()" ></bold> 
+            MOD <bold data-bind="text : AS2Mod( Strength() ) "></bold></div>
+        <div >Dexterity : <bold data-bind="text : Dexterity()" ></bold> 
+            MOD <bold data-bind="text : AS2Mod( Dexterity() ) "></bold></div>
+        <div >Constitution : <bold data-bind="text : Constitution()" ></bold>
+            MOD <bold data-bind="text : AS2Mod( Constitution() ) "></bold></div>
+        <div >Intelligence : <bold data-bind="text : Intelligence()" ></bold> 
+            MOD <bold data-bind="text : AS2Mod( Intelligence() ) "></bold></div>
+        <div >Wisdom : <bold data-bind="text : Wisdom()" ></bold> 
+            MOD <bold data-bind="text : AS2Mod( Wisdom() ) "></bold></div>
+        <div >Charisma : <bold data-bind="text : Charisma()" ></bold> 
+            MOD <bold data-bind="text : AS2Mod( Charisma() ) "></bold></div>
+        <table border=1 style="width: 100%" >
+            <tbody data-bind="foreach : weapons() ">
+                <tr data-bind="foreach: $data" >
+                    <td data-bind="text : $data "></td>
+                </tr>   
+            </tbody>
+        </table>
+        </div>
+            <!-- /ko -->
+     </body>
+     <script>
+         var players = [];
+         players.push( new Character('Garock_Fighter4'));
+         ko.applyBindings(  { "players" : players } );
+    </script>
+
+</html>
