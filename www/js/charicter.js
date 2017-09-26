@@ -91,9 +91,12 @@ var Character = function(file ){
     self.Features = ko.observableArray();
     self.Resources = ko.observableArray();
     self.Languages = ko.observableArray();
+    self.ExtraProf = ko.observableArray();
+    self.Inventory = ko.observableArray();
     self.Proficiencies = ko.computed( function(){
         var p = [];
         p = p.concat( self.Languages() );
+        p = p.concat(self.ExtraProf() );
         return p;
     })
     self.CleanResources = ko.computed( function(){
@@ -181,11 +184,15 @@ var Character = function(file ){
         }
         if (noteList.length >= 15 ){
             self.Languages(
-                ko.utils.arrayFilter(noteList[4].split("\n") , function(n){
+                [ko.utils.arrayFilter(noteList[4].split("\n") , function(n){
                     return n != "";
-                })
+                }).join(",")]
             );
             console.log(noteList);
+            self.ExtraProf.push(noteList[1]);
+            self.ExtraProf.push(noteList[2]);
+            self.ExtraProf.push(noteList[3]);
+            self.Inventory(noteList[5].split("\n"));
             self.Name( noteList[15]);
         }
         var cleanNotes = ko.utils.arrayFilter(noteList[0].split("\n"), function (str) { 

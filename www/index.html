@@ -92,6 +92,31 @@
     width: .30in;
     text-align: center;
 }
+.inventory{
+    position: absolute;
+    left: 3.7in;
+    top: 8.25in;
+    width: 4.4in;
+    height: 2.2in;
+    text-align: left;
+    line-height: .149in;
+} 
+.inventoryitem {
+    position: relative;
+    font-size: 12px;
+    display: inline-block;
+   
+    overflow: hidden;
+    white-space: nowrap;
+    padding-top: 4px;
+}
+.inventoryitem:nth-child(even) {
+    width: 2in;
+}
+.inventoryitem:nth-child(odd) {
+   padding-left: 10px;
+    width: 1.9in
+}
 .playerresorces {
     position: absolute;
     left: 3.18in;
@@ -280,6 +305,11 @@
                 <!-- /ko -->
             </div>
             <!-- /ko -->
+            <!-- /ko -->
+        </div>
+        <div class="inventory" >
+            <!-- ko foreach : Inventory() -->
+            <div class="inventoryitem" data-bind="text : $data"></div>
             <!-- /ko -->
         </div>
         <div class="playerresorces">
