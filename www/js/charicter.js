@@ -1,5 +1,52 @@
+WeaponsStat = {
+    "Club": "Strength",
+    "Dagger": "StrengthOrDexterity",
+    "Greatclub": "Strength",
+    "Handaxe": "Strength",
+    "Javelin": "Strength",
+    "Light Hammer": "Strength",
+    "Mace": "Strength",
+    "Quarterstaff": "Strength",
+    "Sickle": "Strength",
+    "Spear": "Strength",
+    "Crossbow, light": "Dexterity",
+    "Dart": "Dexterity",
+    "Shortbow": "Dexterity",
+    "Sling": "Dexterity",
+    "Battleaxe": "Strength",
+    "Flail": "Strength",
+    "Glaive": "Strength",
+    "Greataxe": "Strength",
+    "Greatsword": "Strength",
+    "Halberd": "Strength",
+    "Lance": "Strength",
+    "Longsword": "Strength",
+    "Maul": "Strength",
+    "Morningstar": "Strength",
+    "Pike": "Strength",
+    "Rapier": "StrengthOrDexterity",
+"Scimitar" : "StrengthOrDexterity",
+"Shortsword" : "StrengthOrDexterity",
+"Trident" : "Strength",
+    "War Pick": "Strength",
+    "Warhammer": "Strength",
+    "Whip": "StrengthOrDexterity",
+"Blowgun" : "Dexterity",
+    "Crossbow, hand": "Dexterity",
+    "Crossbow, heavy": "Dexterity",
+    "Longbow": "Dexterity",
+    "Net": "Dexterity"
+
+}
 Number.prototype.AlwaysSymbol = function(){
     return (( this > 0 ) ? '+' : "" ) + this;
+}
+function weaponStat( code , name ){
+    if (WeaponsStat.hasOwnProperty( name) ){
+        return WeaponsStat[name];
+    } else {
+        return false;
+    }
 }
 function AS2Mod(stat) { 
     let s = Math.ceil((parseInt(stat) - 1) / 2) - 5; 
@@ -146,7 +193,11 @@ var Character = function(file ){
             
         }
     );
-
+    self.StrengthOrDexterity = ko.computed( function(){
+        let str = self.Strength();
+        let dex = self.Dexterity();
+        return str < dex ? str : dex;
+    });
     self.file = ko.observable( file );
     self.CharXml = ko.observable( false );
     self.weaponSet = ko.observable(false);
@@ -219,7 +270,8 @@ var Character = function(file ){
             self.Resources( tmpRes );
         }
         self.Stats( String($(self.CharXml()).find("abilityScores").text()).split(String.fromCharCode(8864) ) );
-        self.weaponSet( $( self.CharXml() ).find( "weaponList" ).text() )
+        self.weaponSet( $( self.CharXml() ).find( "weaponList" ).text() );
+        console.log(self.weaponSet());
     });
 
 

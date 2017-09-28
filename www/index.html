@@ -260,12 +260,79 @@
 .hitdice12 {
     top: 2.35in;
 }
+.weapons {
+    position: absolute;
+    left: 3.20in;
+    top: 3.89in;
+    width: 4.85in;
+    height: 1.6in;
+    line-height: 19.5px;
+    font-size: 14px;
+    background: rgba(1,1,1,.2);
+}
+.weapon {
+    position: relative;
+}
+.weaponname {
+    width: 1.7in;
+}
+.weaponrange {
+    width: .5in;
+}
+.weaponattack {
+    width: .5in
+}
+.weapondamage {
+    width: .85in;
+    overflow: show;
+    white-space: nowrap;
+}
+.ib {
+    display: inline-block;
+}
  </style>
     
      </head>
      <body id="mybody" >
     <!-- ko foreach : players -->
     <div class="playersheet">
+        <div class="weapons">
+            <!-- ko foreach : weapons() -->
+            <div class="weapon" >
+                <div class="weaponname ib" data-bind="text : $data[0]"></div>
+                <div class="weaponattack ib" >
+                    <!-- ko if : weaponStat( $data[2] , $data[0] ) -->
+                        <!-- ko text : ( parseInt( AS2Mod( $parent[weaponStat( $data[2] , $data[0] )]() )) + parseInt( Level2ProfBonus($parent.ClassLevel()) )  ).AlwaysSymbol()  --><!-- /ko -->
+                    <!-- /ko -->
+                    <!-- ko ifnot : weaponStat( $data[2] , $data[0] ) -->
+                        ???
+                    <!-- /ko -->
+                </div>
+                <div class="weapondamage ib" >
+                    <!-- ko foreach : $data -->
+                        <!-- ko if : $index() > 10 -->
+                            <!-- ko if : $index() % 2 == 1 -->
+                                <!-- ko text : $data --><!-- /ko -->
+                            <!-- /ko -->
+                            <!-- ko if : $index() % 2 == 0 -->
+                                d<!-- ko text : $data --><!-- /ko -->&nbsp; 
+                            <!-- /ko -->
+                        <!-- /ko -->
+                    <!-- /ko -->
+                    <!-- ko if : $data[9] == "true" -->
+                        +
+                        <!-- ko if : weaponStat( $data[2] , $data[0] ) -->
+                            <!-- ko text : parseInt(AS2Mod( $parent[weaponStat( $data[2] , $data[0] )]() ) ) --><!-- /ko -->
+                        <!-- /ko -->
+                        <!-- ko ifnot : weaponStat( $data[2] , $data[0] ) -->
+                            ???
+                        <!-- /ko -->
+                    <!-- /ko -->
+                </div>
+                <div class="weaponrange ib" data-bind="text : $data[1]"></div>
+            </div>
+            <!-- /ko -->
+        </div>
         <!-- ko if : HitDice() -->
             <div class="hitdice" data-bind="css : 'hitdice' + HitDice()[2], text : HitDice()[1]"></div>
         <!-- /ko -->
