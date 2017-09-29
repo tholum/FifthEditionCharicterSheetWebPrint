@@ -14,8 +14,8 @@
     width: 8.5in;
     height: 11in;
     position: relative;
-    font-family: 'Tangerine', cursive;
-    font-size: 24px;
+    
+    
 }
 .classname {
     position: absolute;
@@ -37,14 +37,14 @@
     left: .47in;
     width: .61in;
     text-align: center;
-    font-size: 32px;
+    font-size: 1.3em; 
 }
 .classmodifier {
     position: absolute;
     left: .47in;
     width: .61in;
     text-align: center;
-    font-size: 18px;
+    font-size: .75em;
 }
 
 .classScoreStrength {
@@ -91,6 +91,7 @@
     top: 2.1in;
     width: .30in;
     text-align: center;
+ 
 }
 .inventory{
     position: absolute;
@@ -103,7 +104,7 @@
 } 
 .inventoryitem {
     position: relative;
-    font-size: 12px;
+    font-size: .5em;
     display: inline-block;
    
     overflow: hidden;
@@ -129,7 +130,7 @@
 }
 .playerresorce {
     position: relative;
-    font-size: 12px;
+    font-size: .5em;
     display: inline-block;
     width: 2.2in;
     overflow: hidden;
@@ -142,6 +143,7 @@
 .classproficient {
     position: absolute;
     left: 1.42in;
+       line-height: 24px;
 }
 .classProficientStrength {
         top: 2.515in;
@@ -194,7 +196,7 @@
 }
 .playerProficiency {
     position: relative;
-    font-size: 12px;
+    font-size: .5em;
     display: inline-block;
     width: 2.2in;
     overflow: hidden;
@@ -217,7 +219,7 @@
 .playerSkill {
     line-height: 10px;
     height: 17.6px;
-    font-size: 14px;
+    font-size: .583em;
 }
 .ArmorBonus {
     position: absolute;
@@ -225,7 +227,7 @@
     left: 3.2in;
     width: .5in;
     text-align: center;
-    font-size: 32px;
+    font-size: 1.3em; 
 }
 .MaxHealth {
     position: absolute;
@@ -233,7 +235,7 @@
     left: 4.01in;
     width: .5in;
     text-align: center;
-    font-size: 32px;
+    font-size: 1.3em;
 }
 .Name {
     position: absolute;
@@ -246,7 +248,7 @@
     width: .25in;
     text-align: center;
 
-    font-size: 16px;
+    font-size: .66em;
 }
 .hitdice6 {
     top: 1.8in;
@@ -267,7 +269,7 @@
     width: 4.85in;
     height: 1.6in;
     line-height: 19.5px;
-    font-size: 14px;
+    font-size: .583em;
 }
 .weapon {
     position: relative;
@@ -289,10 +291,43 @@
 .ib {
     display: inline-block;
 }
+.tools {
+    position: absolute;
+    top: 0;
+    left: 1in;
+    width: 6.5in;
+    height: .25in;
+    z-index: 10;
+    background: #BD8408;
+    border-left: 2px solid #9B6C06;
+    border-right: 2px solid #9B6C06;
+    border-bottom: 2px solid #9B6C06;
+    border-bottom-left-radius: .1in;
+    border-bottom-right-radius: .1in;
+}
+@media print {
+    .noprint {
+        display: none;
+    }
+}
+.bodystyle-default {
+    font-family: 'Tangerine', cursive;
+    font-size: 24px;
+}
+.bodystyle-other {
+    font-family: 'Tangerine';
+}
+.bodystyle-clean {
+    font-family:  'Helvetica';
+    font-size: 14px;
+}
  </style>
     
      </head>
-     <body id="mybody" >
+     <body id="mybody" data-bind="css : 'bodystyle-' + style()" >
+         <div class="noprint tools">
+             <select data-bind="value : style, options : ['default' , 'other' , 'clean']"></select>
+         </div>
     <!-- ko foreach : players -->
     <div class="playersheet">
         <div class="weapons">
@@ -394,7 +429,7 @@
      <script>
          var players = [];
          players.push( new Character('Garock_Fighter4'));
-         ko.applyBindings(  { "players" : players } );
+         ko.applyBindings(  { "players" : players , "style" : ko.observable() } );
     </script>
 <script type="text/javascript">
          window.onload = function () {
